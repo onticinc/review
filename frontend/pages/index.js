@@ -3,13 +3,13 @@ import Layout from '../components/Layout'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: '25px auto', 
+    margin: '50px auto', 
     maxWidth: '95vw'
   }
 }))
 
 
-export default function Home() {
+export default function Home( {number} ) {
   const classes = useStyles()
   return (
     <Layout>
@@ -22,7 +22,7 @@ export default function Home() {
                   Category
                 </Avatar>
               }
-              title='Category'
+              title={`Category ${number}`} 
               subheader='See all'
             />
           </Card>
@@ -56,4 +56,16 @@ export default function Home() {
       </Grid>
     </Layout>
   )
+}
+
+
+export async function getServerSideProps() {
+  //fetch our data
+  const number = 5;
+
+  return {
+    props: {
+      number: number
+    }
+  }
 }
