@@ -1,6 +1,6 @@
-import { Grid, Card, CardHeader, Avatar, makeStyles } from '@material-ui/core'
-import Layout from '../components/Layout'
-import axios from 'axios'
+import { Grid, Card, CardHeader, Avatar, makeStyles } from '@material-ui/core';
+import Layout from '../components/Layout';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +35,7 @@ export default function Home({ categories }) {
 }
 
 export async function getServerSideProps() {
-  const { data } = await axios.get('http://localhost:8000/categories')
+  const { data } = await axios.get('http://127.0.0.1:8000/categories')
 
   return {
     props: {
