@@ -30,5 +30,7 @@ class BusinessViewSet(viewsets.ModelViewSet):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['slug']
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
