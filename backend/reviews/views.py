@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from reviews.serializers import UserSerializer, GroupSerializer, ReviewSerializer, BusinessSerializer, CategorySerializer
 from reviews.models import Review, Business, Category
-
+from django_filters.rest_framework import DjangoFilterBackend
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
