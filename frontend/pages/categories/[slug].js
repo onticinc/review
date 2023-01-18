@@ -1,7 +1,7 @@
 import React from 'react';
-import axios from 'axios'
 import { Box, Card, CardContent, Grid, Link, Typography, makeStyles } from "@material-ui/core";
 import Layout from '../../components/Layout';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,11 +54,11 @@ const Category = ({ category }) => {
 }
 
 export async function getServerSideProps({ query: { slug } }) {
-  const { data } = await axios.get('http://127.0.0.1:8000/categories?slug=${}')
+  const { data } = await axios.get('http://127.0.0.1:8000/categories?slug=${slug}')
 
   return {
     props: {
-      category: data.results[0]  || null
+      category: data.results[0] || null
     }
   }
 }
