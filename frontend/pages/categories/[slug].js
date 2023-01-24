@@ -1,11 +1,12 @@
 import React from 'react';
-import { Box, Card, CardContent, Grid, Link, Typography, makeStyles } from "@material-ui/core";
-import Layout from '../../components/Layout';
-import axios from 'axios';
+import Layout from '../../components/Layout'
+import { Box, Card, CardContent, Grid, Link, makeStyles, Typography } from "@material-ui/core";
+import axios from 'axios'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: '85px',
+    marginTop: '75px',
     maxWidth: '95vw'
   },
   subtitle: {
@@ -18,35 +19,43 @@ const useStyles = makeStyles((theme) => ({
 
 const Category = ({ category }) => {
   const classes = useStyles()
+  const router = useRouter()
+
+  const handleBusinessClick = business => {
+    router.push(`/business/${business.slug}`)
+  }
+
   return (
     <Layout>
-      <Grid container className={classes.root}>
+    	<Grid container className={classes.root}>
         <Grid item xs={12} md={3}>
-          Todo Filters
+          todo filters
         </Grid>
+
         <Grid item xs={12} md={9}>
-          {category.business.map(business => (
-            <Card className={classes.card}>
-              <Box>
-                <CardContent>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <Typography variant='h5'>Business Name</Typography>
-                      <Typography variant='subtitle1'>$$$</Typography>
-                      <Link variant='subtitle1' href='http://localhost:3000'>Business Website</Link>
-                      <Typography variant="subtitle1">Business Phone</Typography>
-                      <Typography variant="subtitle1" className={classes.subtitle}>Description</Typography>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Typography variant='h5'>Todo Reviews</Typography>
-                      <Typography variant='subtitle1'>Business Hours</Typography>
-                      <Typography variant='subtitle1'>Address</Typography>
-                    </Grid>
-                  </Grid>
-                </CardContent>
-              </Box>
-            </Card>
-          ))}
+        {category.business.map(business => (
+          <Card className={classes.card} onClick={() => handleBusinessClick(business)}>
+            <Box>
+              <CardContent>
+              <Grid container>
+                <Grid item xs={6}>
+                  <Typography variant='h5'>{business.name}</Typography>
+                  <Typography variant='subtitle1'>{business.price_range}</Typography>
+                  <Link variant='subtitle1' href={business.website}>{business.website}</Link>
+                  <Typography variant='subtitle1'>{business.phone}</Typography>
+                  <Typography variant='subtitle1' className={classes.subtitle}>{business.description}</Typography>
+                </Grid>
+
+                <Grid item xs={6}>
+                  <Typography variant='h5'>Todo Reviews</Typography>
+                  <Typography variant='subtitle1'>{business.hours}</Typography>
+                  <Typography variant='subtitle1'>{business.street_address} {business.city}, {business.region} {business.postal_code} {business.country}</Typography>
+                </Grid>
+                </Grid>
+              </CardContent>
+            </Box>
+          </Card>
+        ))}
         </Grid>
       </Grid>
     </Layout>
